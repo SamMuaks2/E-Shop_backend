@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import multer from "multer";
 import path from "path";
 import cors from "cors";
+import { type } from "os";
 
 
 const app = express();
@@ -25,7 +26,7 @@ app.get("/", (req, res) => {
 const storage = multer.diskStorage({
     destination: './upload/images',
     filename: (req, file, cb) => {
-        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+        return cb(null, `${file.fieldname}_${Date.now()}_${path.extname(file.originalname)}`)
     }
 })
 
@@ -39,6 +40,53 @@ app.post("/upload", upload.single('product'), (req, res) => {
         success: 1,
         image_url: `http://localhost:${port}/images/${req.file.filename}`
     })
+})
+
+// Product creation Schema
+const Products = mongoose.model("Product", {
+    id: {
+        type: Number,
+        required: true,
+    },
+
+    name: {
+        type: String,
+        required: true,
+    },
+
+    image: {
+        type: String,
+        required: true,
+    },
+
+    category: {
+        type: String,
+        required: true,
+    },
+
+    new_price: {
+        type: Number,
+        required: true,
+    },
+
+    old_price: {
+        type: Number,
+        required: true,
+    },
+
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+
+    available: {
+        type: Boolean,
+        default: true,
+    },
+})
+
+app.post("/addproduct", async (req, res) => {
+    const product = new Product({})
 })
 
 app.listen(port, (error) => {
