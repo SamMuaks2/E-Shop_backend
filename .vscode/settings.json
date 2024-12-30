@@ -1,0 +1,19 @@
+{
+    "emmet.preferences": {
+
+
+    },
+    "html-css-class-completion.enableEmmetSupport": true,
+    "emmet.showSuggestionsAsSnippets": false,
+    "emmet.triggerExpansionOnTab": false,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+    "emmet.syntaxProfiles": {
+        "javascriptreact": {
+        "class": "className"
+    }
+    },
+    "emmet.showAbbreviationSuggestions": true
+}
