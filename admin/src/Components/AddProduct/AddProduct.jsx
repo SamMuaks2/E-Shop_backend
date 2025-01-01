@@ -21,7 +21,43 @@ const AddProduct = () => {
     setProductDetails({...productDetails, [e.target.name] : e.target.value})
   }
 
-  const Add_Product = async () => {}
+  const Add_Product = async () => {
+    console.log(productDetails);
+    
+    let responseData;
+
+    let product = productDetails;
+
+    let formData = new FormData();
+    formData.append('product', image);
+
+    await fetch('http://localhost:4000/upload' , {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+      },
+
+      body: formData,
+    }).then((resp) => resp.json()).then((data) => {responseData = data})
+
+    if (responseData.success) {
+      product.image = responseData.image_url;
+      console.log(product)
+
+      await fetch('http://localhost:4000/addproduct', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify(product),
+        
+      }).then((resp) => resp.json()).then((data) => {
+        data.success ? alert("Product has been added") : alert("Failed")
+      })
+    }
+  }
 
   return (
     <div className="add-product">
@@ -58,7 +94,7 @@ const AddProduct = () => {
           <input onChange={imageHandler} type="file" name='image' id='file-input' hidden />
         </div>
 
-        <button className='addproduct-btn'>ADD</button>
+        <button onClick={() => {Add_Product()}} className='addproduct-btn'>ADD</button>
     </div>
   )
 }
