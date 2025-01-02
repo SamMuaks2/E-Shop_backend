@@ -16,6 +16,7 @@ app.use(cors());
 
 // MongoDb connection
 mongoose.connect("mongodb+srv://sammuaks:broski2024@e-shop-app-0.dp5zh.mongodb.net/e-shopApp")
+mongodb+srv://sammuaks:<db_password>@e-shop-app-0.dp5zh.mongodb.net/
 
 // API endpoints
 app.get("/", (req, res) => {
