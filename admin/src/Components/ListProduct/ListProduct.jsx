@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import "./ListProduct"
+import "./ListProduct.css"
+import crossIcon from "../../assets/cross_icon.png"
 
 const ListProduct = () => {
   const [allproducts, setAllproducts] = useState([]);
@@ -28,7 +29,21 @@ const ListProduct = () => {
         <div className="listproduct-allproducts">
           <hr />
 
-          {allproducts.map}
+          {allproducts.map((product, index) => {
+            return <>
+            <div key={index} className="listproduct-format-main listproduct-format">
+              <img src={product.image} alt="" className="listproduct-product-icon" />
+              <p>{product.name}</p>
+              <p>${product.old_price}</p>
+              <p>${product.new_price}</p>
+              <p>{product.category}</p>
+
+              <img src={crossIcon} alt="" className="listproduct-remove-icon" />
+            </div>
+
+            <hr />
+            </>
+          })}
         </div>
     </div>
   )

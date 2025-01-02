@@ -90,8 +90,9 @@ app.post("/addproduct", async (req, res) => {
     let products = await Products.find({});
 
     let id;
-    if (products.length>0) {
-        let last_product_array = product.slice(-1);
+
+    if (products.length > 0) {
+        let last_product_array = products.slice(-1);
         let last_product = last_product_array[0];
         id = last_product.id + 1;
     } else {
@@ -119,7 +120,7 @@ app.post("/addproduct", async (req, res) => {
 
 // API for deleting products
 app.post("/removeproduct", async (req, res) => {
-    await Product.findOneAndDelete({id: req.body.id});
+    await Products.findOneAndDelete({id: req.body.id});
 
     console.log("Removed successfully");
 
@@ -131,7 +132,7 @@ app.post("/removeproduct", async (req, res) => {
 
 // API that gets all products
 app.get("/allproducts", async (req, res) => {
-    let products = await Product.find({});
+    let products = await Products.find({});
     console.log("Fetched all products");
 
     res.send(products);
