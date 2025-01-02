@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDb connection
-mongoose.connect("mongodb+srv://sammuaks:broski2024@e-shop-app-0.dp5zh.mongodb.net/e-shopApp")
-mongodb+srv://sammuaks:<db_password>@e-shop-app-0.dp5zh.mongodb.net/
+// mongoose.connect("mongodb+srv://sammuaks:_N5_4YNdxTCaCH5@e-shop-app-0.dp5zh.mongodb.net/e-shopApp")
+mongoose.connect("mongodb+srv://sammuaks:_N5_4YNdxTCaCH5@e-shop-app-0.dp5zh.mongodb.net/")
 
 // API endpoints
 app.get("/", (req, res) => {
@@ -87,10 +87,10 @@ const Products = mongoose.model("Product", {
 })
 
 app.post("/addproduct", async (req, res) => {
-    let products = await Product.find({});
+    let products = await Products.find({});
 
     let id;
-    if (products.length > 0) {
+    if (products.length>0) {
         let last_product_array = product.slice(-1);
         let last_product = last_product_array[0];
         id = last_product.id + 1;
@@ -98,7 +98,7 @@ app.post("/addproduct", async (req, res) => {
         id= 1;
     }
 
-    const product = new Product({
+    const product = new Products ({
         id: id,
         name: req.body.name,
         image: req.body.image,
